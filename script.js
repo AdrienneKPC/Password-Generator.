@@ -30,7 +30,36 @@ function generatePassword() {
     let lowercase = confirm("Do you want lowercase characters?");
     let specialChar = confirm("Do you want special characters?");
     let numbers = confirm("Do you want numbers?");
-  } else { alert("Please select length between 8 and 128") }
+    if (uppercase === false && lowercase === false && specialChar === false && numbers === false) {
+      alert("Please select at least one character type")
+      writePassword()
+      return
+    }
+    let selectedChars = []
+    //combining arrays
+    if (uppercase === true) {
+      selectedChars = selectedChars.concat(upperCase)
+    }
+    if (lowercase === true) {
+      selectedChars = selectedChars.concat(lowerCase)
+    }
+    if (numbers === true) {
+      selectedChars = selectedChars.concat(number)
+    }
+    if (specialChar === true) {
+      selectedChars = selectedChars.concat(specialCharacters)
+    }
+    let password = ""
+    for (let i = 0; i <= charReturnNum; i++) {
+      password += getRandomArrayIndex(selectedChars)
+    }
+
+    return password
+  } else {
+    alert("Please select length between 8 and 128")
+    writePassword()
+    return
+  }
 
 }
 
@@ -39,4 +68,3 @@ function getRandomArrayIndex(arr) {
   return arr[randomIndex]
 }
 
-function charMix(){}
